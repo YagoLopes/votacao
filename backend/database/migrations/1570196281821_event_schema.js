@@ -8,8 +8,8 @@ class EventSchema extends Schema {
     this.create('events', (table) => {
       table.increments()
       table.string('name').notNullable(),
-      table.datetime('start',['yyyy-MM-dd HH:ii:ss']).notNullable(),
-      table.datetime('end',['yyyy-MM-dd HH:ii:ss']).notNullable(),
+      table.datetime('start').notNullable(),
+      table.datetime('end').notNullable(),
       table.timestamps()
     })
   }
