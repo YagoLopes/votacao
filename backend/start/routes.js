@@ -14,11 +14,16 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
 
-Route.post('/register', "AuthController.register" );
+
+
 Route.post('/authenticate', "AuthController.authenticate" );
+Route.get('/events', "EventController.index" );
+Route.get('/events/:id', "EventController.show" );
+
 
 Route.group(()=>{
-Route.resource('events', 'EventController').apiOnly();
+Route.post('register', "AuthController.register" );
+Route.resource('events', "EventController" ).apiOnly().except("get");
 Route.resource('categories', 'CategoryController').apiOnly();
 Route.resource('works', 'WorkController').apiOnly();
 }).middleware('auth');
