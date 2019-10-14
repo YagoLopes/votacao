@@ -7,7 +7,7 @@ class CategoriesSchema extends Schema {
   up () {
     this.create('categories', (table) => {
       table.increments()
-      table.string('description').notNullable();
+      table.string('description').notNullable().unique();
       table.integer('event_id')
       .unsigned()
       .notNullable()

@@ -1,39 +1,39 @@
-'use strict'
+'use strict';
 
-const Event = use("App/Models/Event")
+const Event = use('App/Models/Event');
 
 class EventController {
-
-  async index () {
+  async index() {
     const events = await Event.all();
     return events;
   }
 
-  async store ({ request}) {
+  async store({ request }) {
     const data = request.only(['name', 'start', 'end']);
-const event = await Event.create(data);
-return event;
+    const event = await Event.create(data);
+    return event;
   }
 
-  async show ({ params }) {
-
+  async show({ params }) {
     const event = await Event.findOrFail(params.id);
     return event;
   }
 
-
-  async update ({ request}) {
+  async update({ params, request }) {
     const data = request.only(['name', 'start', 'end']);
-    const event = await Event.update(data)
-    await event.save()
-return event;
+
+    const event = await Event.find(params.id);
+
+    event.merge(data);
+
+    await event.save();
+    return event;
   }
 
-
-  async destroy ({ params}) {
+  async destroy({ params }) {
     const event = await Event.findOrFail(params.id);
     await event.delete();
   }
 }
 
-module.exports = EventController
+module.exports = EventController;

@@ -1,38 +1,43 @@
-'use strict'
+'use strict';
 
-
-const Category = use("App/Models/Category")
+const Category = use('App/Models/Category');
 
 class CategoryController {
-
-  async index () {
-const category = await Category.all();
-return category;
+  async index() {
+    const categories = await Category.all();
+    return categories;
   }
 
-
-  async store ({ request}) {
-    const data = request.only(['description','event_id']);
+  async store({ request }) {
+    const data = request.only(['description', 'event_id']);
     const category = await Category.create(data);
     return category;
   }
 
+  async show({ params }) {
+    const categories = await Category.query()
+      .where('event_id', '=', params.id)
+      .fetch();
+    if (categories) {
+      return categories;
+    }
+  }
 
-  async show ({ params }) {
+  async update({ params, request }) {
+    const data = request.only(['description']);
 
-    const category = await Category.findOrFail(params.id);
+    const category = await Category.find(params.id);
+
+    category.merge(data);
+
+    await category.save();
     return category;
   }
 
-
-
-  async update ({ params, request, response }) {
-  }
-
-  async destroy ({ params}) {
+  async destroy({ params }) {
     const category = await Category.findOrFail(params.id);
     await category.delete();
   }
 }
 
-module.exports = CategoryController
+module.exports = CategoryController;

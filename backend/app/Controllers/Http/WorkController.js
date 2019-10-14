@@ -1,93 +1,53 @@
-'use strict'
-
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
-
-/**
- * Resourceful controller for interacting with works
- */
+'use strict';
+const Work = use('App/Models/Work');
 class WorkController {
-  /**
-   * Show a list of all works.
-   * GET works
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index ({ request, response, view }) {
+  async index() {
+    const works = await Work.all();
+    return works;
   }
 
-  /**
-   * Render a form to be used for creating a new work.
-   * GET works/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
+  async store({ request }) {
+    const data = request.only([
+      'title',
+      'description',
+      'owner',
+      'email',
+      'categories_id',
+    ]);
+    const work = await Work.create(data);
+    return work;
   }
 
-  /**
-   * Create/save a new work.
-   * POST works
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async store ({ request, response }) {
+  async show({ params }) {
+    const works = await Work.query()
+      .where('categories_id', '=', params.id)
+      .fetch();
+    if (works) {
+      return works;
+    }
   }
 
-  /**
-   * Display a single work.
-   * GET works/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
+  async update({ params, request }) {
+    const data = request.only([
+      'title',
+      'description',
+      'owner',
+      'email',
+      'categories_id',
+    ]);
+
+    const work = await Work.find(params.id);
+
+    work.merge(data);
+
+    await work.save();
+    return work;
   }
 
-  /**
-   * Render a form to update an existing work.
-   * GET works/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
-
-  /**
-   * Update work details.
-   * PUT or PATCH works/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async update ({ params, request, response }) {
-  }
-
-  /**
-   * Delete a work with id.
-   * DELETE works/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, request, response }) {
+  async destroy({ params }) {
+    const work = await Work.findOrFail(params.id);
+    await work.delete();
   }
 }
 
-module.exports = WorkController
+module.exports = WorkController;
