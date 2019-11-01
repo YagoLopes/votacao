@@ -1,40 +1,37 @@
-div.container {
-    background-color: palevioletred;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+div.container-cadastro-user {
+  background-color: palevioletred;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
-
-div.container form{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: palegreen;
-
+div.container-cadastro-user form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: palegreen;
 }
 
-
-div.container div{
-    width: 100%;
-    background-color: #E5E5E5;
-    text-align: center;
+div.container-cadastro-user div {
+  width: 100%;
+  background-color: #e5e5e5;
+  text-align: center;
 }
 
-div.container form input{
-    background-color: yellow;
+div.container-cadastro-user form input {
+  background-color: yellow;
 }
 
-div.container form button{
-    cursor: pointer;
+div.container-cadastro-user form button {
+  cursor: pointer;
 }
 
 /*
-div.container div.form form input{
+div.container-cadastro-user div.form form input{
     background: #ffffff;
   border: 1px solid #c2b2ff;
   box-sizing: border-box;
@@ -52,7 +49,7 @@ div.check{
 
 
 
-div.container div.form {
+div.container-cadastro-user div.form {
     width: 100%;
     height: 100%;
     display: flex;
@@ -61,7 +58,7 @@ div.container div.form {
     
 }
 
-div.container div.form form button.res {
+div.container-cadastro-user div.form form button.res {
     margin: 10px;
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: bold;
@@ -78,17 +75,17 @@ div.container div.form form button.res {
     color: rgba(39, 44, 89, 0.79);
   }
 
-  div.container div.form form button.res:hover{
+  div.container-cadastro-user div.form form button.res:hover{
       background-color: rgba(39, 44, 89, 0.79);
       color:white;
   }
 
-  div.container div.form form button.sub:hover{
+  div.container-cadastro-user div.form form button.sub:hover{
     background-color: rgba(241, 218, 11, 0.79);
     color:white;
 }
 
-div.container div.form form button.sub{
+div.container-cadastro-user div.form form button.sub{
     width: 100%;
 }
 
